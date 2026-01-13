@@ -7,20 +7,18 @@ class Solution(object):
         """
         if len(t)!=len(s):
             return False
-        word_dictionary=dict()
-        for i in s:
-            if(word_dictionary.get(i)!=None):
-                word_dictionary[i]=word_dictionary.get(i)+1
-                continue
-            word_dictionary[i]=1
+        nums = [0]*26
 
+        for i in range(len(s)):
+            nums[ord(s[i]) - ord ('a')]+=1
+            nums[ord(t[i]) - ord ('a')]-=1
         
-        for i in t:
-            if(word_dictionary.get(i)!=0 and word_dictionary.get(i)!=None ):
-                word_dictionary[i]=word_dictionary.get(i)-1
-                continue
-            return False
+
+        for i in nums:
+            if(i!=0):
+                return False
         return True
+
             
 
 sol = Solution()
