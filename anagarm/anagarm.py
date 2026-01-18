@@ -5,21 +5,11 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        if len(t)!=len(s):
+        if(len(s)!=len(t)):
             return False
-        nums = [0]*26
-
-        for i in range(len(s)):
-            nums[ord(s[i]) - ord ('a')]+=1
-            nums[ord(t[i]) - ord ('a')]-=1
         
-
-        for i in nums:
-            if(i!=0):
-                return False
-        return True
-
+        return sorted(s)==sorted(t)
             
 
 sol = Solution()
-print(sol.isAnagram(s="rat",t="car"))
+print(sol.isAnagram(s="anagram",t="nagaram"))

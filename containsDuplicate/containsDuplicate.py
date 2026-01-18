@@ -4,14 +4,14 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        dictionary={}
-        index=0
+        dictionary=dict()
+
         for i in nums:
-            if dictionary.get(i) !=None:
+            if(dictionary.get(i)!=None):
                 return True
-            dictionary[i]=index
-            index=index+1
-        return False
+            
+            dictionary[i]=0
+        return False 
 
 sol= Solution()
 print(sol.containsDuplicate([1,2,3,1]))

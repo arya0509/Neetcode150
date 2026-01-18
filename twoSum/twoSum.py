@@ -5,9 +5,10 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        nums_dict=dict()
+       
+        Dict=dict()
+
         for i in range(len(nums)):
-            if(nums_dict.get(target-nums[i])!=None):
-                return [nums_dict.get(target-nums[i]),i]
-            nums_dict[nums[i]]=i
-        
+            if(Dict.get(target-nums[i])!=None):
+                return [Dict.get(target-nums[i]),i]
+            Dict[nums[i]]=i
