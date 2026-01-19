@@ -1,42 +1,45 @@
 class Solution:
 
     def encode(self, strs):
-       
-        if not strs:
-            return ''
+
+        size=[]
         output=""
-        for size in strs:
-            output+=str(len(size))+','
+        for word in strs:
+            size.append(len(word))
+
+        for i in size:
+            output+=str(i)+","
         output+="#"
 
-        for words in strs:
-            output+=words
+        for word in strs:
+            output+=word
         
         return output 
-
-
+            
     def decode(self,  s) :
-       
-        if not s:
-            return [ ]
-        sizes=[]
+        size=[]
         output=[]
-        i=0
-        while(s[i]!="#"):
-            num=''
-            while(s[i]!=','):
-                num+=s[i]
-                i+=1
-            sizes.append(int(num))
-            i+=1
-        i+=1
-        
-        for size in sizes:
-            output.append(s[i:i+size])
-            print('We are here')
-            i+=size
 
-        return output 
+        index=0
+
+        while(s[index]!='#'):
+            num=''
+            while(s[index]!=','):
+                num+=s[index]
+            size.append(int(num))
+        index+=1
+
+        for sz in size:
+            output.append(s[index:sz+index])
+            index+=sz
+                    
+        return output
+
+
+           
+           
+        
 
 sol=Solution()
-print(sol.decode(sol.encode(["",""])))
+
+print((sol.encode(["Hello","World"])))
