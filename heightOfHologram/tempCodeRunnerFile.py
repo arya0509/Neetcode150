@@ -1,0 +1,1 @@
+rightMost[i]-leftMost[i]
