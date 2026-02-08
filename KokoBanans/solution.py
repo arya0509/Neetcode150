@@ -10,7 +10,7 @@ class Solution(object):
         r=max(piles)
         res=max(piles)
         while(l<=r):
-            mid=r+l//2
+            mid=(r+l)//2
             bansPerHour=0
             for p in piles:
                 bansPerHour+=math.ceil(p/mid)
