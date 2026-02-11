@@ -1,9 +1,8 @@
 from collections import defaultdict
 class TimeMap(object):
-    
-    def __init__(self):
-        self.KeyTimeDict= defaultdict(list)
 
+    def __init__(self):
+        self.keyTimeValDict=defaultdict(list)
     def set(self, key, value, timestamp):
         """
         :type key: str
@@ -11,9 +10,8 @@ class TimeMap(object):
         :type timestamp: int
         :rtype: None
         """
+        self.keyTimeValDict[key].append([timestamp,value])
         
-        self.KeyTimeDict[key].append([timestamp,value])
-        print(self.KeyTimeDict[key])
 
     def get(self, key, timestamp):
         """
@@ -21,30 +19,22 @@ class TimeMap(object):
         :type timestamp: int
         :rtype: str
         """
-        listOfKey=self.KeyTimeDict.get(key,"")
-       
-        if(listOfKey==""):
-            return ""
+        timeValList=self.keyTimeValDict[key]
         l=0
-        r=len(listOfKey)-1
+        r=len(timeValList)-1
+        res=""
         while(l<=r):
-            mid=r+l//2
-            if(listOfKey[mid][0]<=timestamp):
+            mid=(l+r)//2
+            if(timeValList[mid][0]<=timestamp):
+                res=timeValList[mid][0]
                 l=mid+1
-                while(mid+1!=len(listOfKey) and listOfKey[mid+1][0]<=timestamp):
-                    mid+=1
-                return listOfKey[mid][1]
 
-            if(listOfKey[mid][0]>timestamp):
+            else:
                 r=mid-1
-            
-
-        return ""
-        
+        return res
 
 
 # Your TimeMap object will be instantiated and called as such:
-obj = TimeMap()
-obj.set("foo", "bar", 1)
-param_2 = obj.get("foo",1)
-print(param_2)
+# obj = TimeMap()
+# obj.set(key,value,timestamp)
+# param_2 = obj.get(key,timestamp)
