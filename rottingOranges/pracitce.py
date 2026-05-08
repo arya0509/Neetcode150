@@ -1,38 +1,41 @@
 from collections import deque
-class Solution(object):
-    def orangesRotting(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
-        visited=set()
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
         q=deque()
         ROW=len(grid)
         COL=len(grid[0])
-        def addAndVisit(row,col):
-            if(min(row,col)<0 or row==ROW or col==COL or (row,col) in visited or grid[row][col]==0):
+        self.fresh_oranges=0
+        visited=set()
+        def addToq(row,col):
+            if(min(row,col)<0 or row>=ROW or col>=COL or grid[row][col]==0 or(row,col) in visited):
                 return 
-            visited((row,col))
+            visited.add((row,col)) 
             q.append((row,col))
-        for row in range(ROW):
-            for col in range(COL):
-                if(grid[row][col]==2):
-                    addAndVisit(row,col)
-        
-        time=0
+        for r in range(ROW):
+            for c in range(COL):
+                if(grid[r][c]==1):
+                    self.fresh_oranges+=1
+                elif(grid[r][c]==2):
+                    addToq(r,c)
+      
+        if(not self.fresh_oranges):
+            return 0
+        minTime=-1
         while(q):
-            for i in range(len(q)):
-                row,col=q.popleft()
-                grid[row][col]=2
-                addAndVisit(row+1,col)
-                addAndVisit(row-1,col)
-                addAndVisit(row,col+1)
-                addAndVisit(row,col-1)
-            time+=1
-        for row in range(ROW):
-            for col in range(COL):
-                if(grid[row][col]==1):
-                    return -1
-        return time
-
-
+            minTime+=1
+            length=len(q)
+            for i in range(length):
+                r,c=q.popleft()
+                if(grid[r][c]==1):
+                    self.fresh_oranges-=1
+                    grid[r][c]=2
+               
+                addToq(r+1,c)
+                addToq(r-1,c)
+                addToq(r,c+1)
+                addToq(r,c-1)
+           
+            
+        if self.fresh_oranges:
+            return -1
+        return minTime
