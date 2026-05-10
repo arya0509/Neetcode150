@@ -11,15 +11,13 @@ class Solution(object):
         maxSeq[2]+=maxSeq[0]
         one=1
         two=0
-        res=max(nums[one],nums[two],maxSeq[2])
+        res=max(nums[one],nums[two])
         for i in range(3,len(nums)):
             oneSum=maxSeq[one]+maxSeq[i]
             twoSum=maxSeq[two]+maxSeq[i]
 
             maxSeq[i]=max(oneSum,twoSum)
             res=max(res,maxSeq[i])
-            one+=1
-            two+=1
         return res
 
 
