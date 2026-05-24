@@ -5,7 +5,7 @@ class Solution(object):
         :rtype: int
         """
        
-        sum=nums[0]
+        sum=float("-inf")
         res=sum
         for num in nums:
             sum=max(sum+num,num)
